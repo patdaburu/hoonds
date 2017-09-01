@@ -19,7 +19,7 @@ from collections import Mapping
 
 class SignalsEnum(object):
     """
-    This is a flag interface applied to classes decorated with the :py:decorator:`signals` decorator.
+    This is a flag interface applied to classes decorated with the :py:func:`signals` decorator.
     """
     pass
 
