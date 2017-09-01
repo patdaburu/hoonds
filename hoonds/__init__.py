@@ -5,7 +5,7 @@
 .. currentmodule:: __init__.py
 .. moduleauthor:: Pat Daburu <pat@daburu.net>
 
-Provide a brief description of the module.
+hoonds is an unassuming  collection of tools for python.
 """
 
 __version__ = '0.0.2'  # the working version

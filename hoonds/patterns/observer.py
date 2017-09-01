@@ -5,7 +5,7 @@
 .. currentmodule:: hoonds.patterns.observer
 .. moduleauthor:: Pat Daburu <pat@daburu.net>
 
-Classes and utilities for implementing the `observer pattern<https://en.wikipedia.org/wiki/Observer_pattern>`_.
+Classes and utilities for implementing the `observer pattern <https://en.wikipedia.org/wiki/Observer_pattern>`_.
 """
 
 import inspect
@@ -84,8 +84,6 @@ class UnboundReceiver(object):
 
     def call(self, args: SignalArguments):
         self._receiver_function(args)
-
-
 
 
 class SubscriberHandle(object):
@@ -205,8 +203,8 @@ class Observable(object):
 
             If the receiver is a lambda function, or otherwise might need to receive signals after it goes out of
             scope, you likely want the ``weak`` parameter to be ``True``, however you must remember that any time
-            this argument is ``True`` you are explicitly responsible for making sure the receiver is unsubscribed to
-            prevent memory leaks.
+            this argument is ``True`` you are responsible for making sure the receiver is unsubscribed to prevent
+            memory leaks.
         """
         handle = SubscriberHandle(signal=signal, receiver=receiver, sender=self)
         dispatcher.connect(receiver=handle.receiver, signal=handle.signal, sender=handle.sender, weak=weak)
