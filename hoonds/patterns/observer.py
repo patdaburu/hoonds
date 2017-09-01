@@ -78,14 +78,6 @@ class SignalArguments(Mapping):
         # We consider the
         return len(self.keys()) != 0
 
-class UnboundReceiver(object):
-
-    def __init__(self, receiver_function: [[SignalArguments], None]):
-        self._receiver_function = receiver_function
-
-    def call(self, args: SignalArguments):
-        self._receiver_function(args)
-
 
 class SubscriberHandle(object):
     """

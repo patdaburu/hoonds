@@ -24,6 +24,15 @@ hoonds.logging
     :inherited-members:
     :show-inheritance:
 
+---------------
+hoonds.patterns
+---------------
+.. automodule:: hoonds.patterns
+    :members:
+    :undoc-members:
+    :inherited-members:
+    :show-inheritance:
+
 ------------------------
 hoonds.patterns.observer
 ------------------------
