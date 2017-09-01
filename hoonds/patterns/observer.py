@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-.. currentmodule:: messageboss.patterns.observer
+.. currentmodule:: hoonds.patterns.observer
 .. moduleauthor:: Pat Daburu <pat@daburu.net>
 
 Classes and utilities for implementing the `observer pattern<https://en.wikipedia.org/wiki/Observer_pattern>`_.
@@ -76,6 +76,16 @@ class SignalArguments(Mapping):
         """
         # We consider the
         return len(self.keys()) != 0
+
+class UnboundReceiver(object):
+
+    def __init__(self, receiver_function: [[SignalArguments], None]):
+        self._receiver_function = receiver_function
+
+    def call(self, args: SignalArguments):
+        self._receiver_function(args)
+
+
 
 
 class SubscriberHandle(object):
@@ -175,7 +185,9 @@ class Observable(object):
         """
         return self._get_signals()
 
-    def subscribe(self, signal: Enum, receiver: Callable[[SignalArguments], None]) -> SubscriberHandle:
+    def subscribe(self,
+                  signal: Enum, receiver: Callable[[SignalArguments], None],
+                  weak: bool=True) -> SubscriberHandle:
         """
         Subscribe to a signal.
 
@@ -183,11 +195,21 @@ class Observable(object):
         :type signal:  :py:class:`Enum`
         :param receiver: this is the function or method that will handle the dispatch
         :type receiver:  :py:class:`Callable[[SignalArguments]]`
+        :param weak:  When ``True`` the dispatcher maintains a weak reference to the receiver which will not prevent
+            garbage collection.
+        :type weak:  ``bool``
         :return: a handle that can be used to unsubscribe from the signal
         :rtype:  :py:class:`SubscriberHandle`
+
+        .. note::
+
+            If the receiver is a lambda function, or otherwise might need to receive signals after it goes out of
+            scope, you likely want the ``weak`` parameter to be ``True``, however you must remember that any time
+            this argument is ``True`` you are explicitly responsible for making sure the receiver is unsubscribed to
+            prevent memory leaks.
         """
         handle = SubscriberHandle(signal=signal, receiver=receiver, sender=self)
-        dispatcher.connect(receiver=handle.receiver, signal=handle.signal, sender=handle.sender)
+        dispatcher.connect(receiver=handle.receiver, signal=handle.signal, sender=handle.sender, weak=weak)
         return handle
 
     def send_signal(self, signal: Enum, args: SignalArguments or dict=None):

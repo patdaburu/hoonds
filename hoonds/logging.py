@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-.. currentmodule:: cnxman.logging
+.. currentmodule:: hoonds.logging
 .. moduleauthor:: Pat Daburu <pat@daburu.net>
 
 Dear diary...
