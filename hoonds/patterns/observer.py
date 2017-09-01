@@ -13,7 +13,7 @@ import inspect
 from pydispatch import dispatcher
 from typing import Callable
 from enum import Enum
-from abc import ABCMeta, abstractmethod
+from abc import ABCMeta
 from typing import Any, Dict, List
 from collections import Mapping
 
