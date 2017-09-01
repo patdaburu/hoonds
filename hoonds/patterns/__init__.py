@@ -5,4 +5,5 @@
 .. currentmodule:: __init__.py
 .. moduleauthor:: Pat Daburu <pat@daburu.net>
 
+python implementations of common design patterns.
 """

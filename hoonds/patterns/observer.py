@@ -5,7 +5,8 @@
 .. currentmodule:: hoonds.patterns.observer
 .. moduleauthor:: Pat Daburu <pat@daburu.net>
 
-Classes and utilities for implementing the `observer pattern <https://en.wikipedia.org/wiki/Observer_pattern>`_.
+Here we have classes and utilities for implementing the
+`observer <https://en.wikipedia.org/wiki/Observer_pattern>`_ pattern.
 """
 
 import inspect
