@@ -5,8 +5,8 @@
 .. currentmodule:: __init__.py
 .. moduleauthor:: Pat Daburu <pat@daburu.net>
 
-hoonds is an unassuming  collection of tools for python.
+hoonds is an unassuming collection of tools for python.
 """
 
-__version__ = '0.0.4'  # the working version
-__release__ = '0.0.4'  # the release version
+__version__ = '0.0.5'  # the working version
+__release__ = '0.0.5'  # the release version
