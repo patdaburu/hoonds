@@ -4,8 +4,6 @@
 """
 .. currentmodule:: tests.patterns.observer.test_Observer
 .. moduleauthor:: Pat Daburu <pat@daburu.net>
-
-Provide a brief description of the module.
 """
 
 import unittest
