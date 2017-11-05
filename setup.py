@@ -23,7 +23,7 @@ setup(
   name='hoonds',
   description='An unassuming collection of utility modules.',
   long_description=long_description,
-  packages=['hoonds'],
+  packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
   version=hoonds.__version__,
   install_requires=[
     'PyDispatcher'
