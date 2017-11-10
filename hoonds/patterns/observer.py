@@ -40,7 +40,7 @@ def signals():
     return add_signals
 
 
-class SignalArguments(Mapping):
+class SignalArgs(Mapping):
     """
     This is a read-only dictionary that holds signal arguments as they're transmitted to receivers.
 
@@ -86,10 +86,10 @@ class SubscriberHandle(object):
     """
     def __init__(self,
                  signal: Enum,
-                 receiver: Callable[[SignalArguments], None],
+                 receiver: Callable[[SignalArgs], None],
                  sender: Any):
         self._signal: Enum = signal
-        self._receiver: Callable[[SignalArguments]] = receiver
+        self._receiver: Callable[[SignalArgs]] = receiver
         self._sender: Any = sender
 
     @property
@@ -102,7 +102,7 @@ class SubscriberHandle(object):
         return self._signal
 
     @property
-    def receiver(self) -> Callable[[SignalArguments], None]:
+    def receiver(self) -> Callable[[SignalArgs], None]:
         """
         Get the receiver.
 
@@ -177,7 +177,7 @@ class Observable(object):
         return self._get_signals()
 
     def subscribe(self,
-                  signal: Enum, receiver: Callable[[SignalArguments], None],
+                  signal: Enum, receiver: Callable[[SignalArgs], None],
                   weak: bool=True) -> SubscriberHandle:
         """
         Subscribe to a signal.
@@ -203,7 +203,7 @@ class Observable(object):
         dispatcher.connect(receiver=handle.receiver, signal=handle.signal, sender=handle.sender, weak=weak)
         return handle
 
-    def send_signal(self, signal: Enum, args: SignalArguments or dict=None):
+    def send_signal(self, signal: Enum, args: SignalArgs or dict=None):
         """
         Send a signal to any interested parties.
 
@@ -216,16 +216,16 @@ class Observable(object):
         # If we got nothing (fairly likely)...
         if args is None:
             # ...normalize the value.
-            _args = SignalArguments({})
+            _args = SignalArgs({})
         elif isinstance(args, dict):
             # If we got a dict (people are lazy, so this is pretty likely), convert it to a signal argument object.
-            _args = SignalArguments(args)
-        elif isinstance(args, SignalArguments):
+            _args = SignalArgs(args)
+        elif isinstance(args, SignalArgs):
             # If we got an actual signal argument object, that's pretty easy.
             _args = args
         else:  # Oops.  We didn't get *any* of the above.  So we have a problem.
             raise TypeError('Arguments must be {sig_arg_typ} or {dict_typ}'.format(
-                sig_arg_typ=SignalArguments.__name__,
+                sig_arg_typ=SignalArgs.__name__,
                 dict_typ=dict.__name__
             ))
         # Now we can dispatch the signal.

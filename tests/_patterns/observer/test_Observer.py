@@ -3,7 +3,7 @@
 
 import unittest
 from enum import Enum
-from hoonds.patterns.observer import Observable, signals, SignalArguments
+from hoonds.patterns.observer import Observable, signals, SignalArgs
 
 
 class Observable1(Observable):
@@ -30,7 +30,7 @@ class Observer1(object):
         self.observable.subscribe(self.observable.signals.SIGNAL_1, receiver=self.signal1_receiver)
         self.observable.subscribe(self.observable.signals.SIGNAL_2, receiver=self.signal2_receiver)
 
-    def signal1_receiver(self, args: SignalArguments):
+    def signal1_receiver(self, args: SignalArgs):
         self.signal1_count += 1
         self.signal1_data = args
 
