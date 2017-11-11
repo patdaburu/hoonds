@@ -58,6 +58,14 @@ class SignalArgs(Mapping):
         """
         self._data = data if data is not None else {}
 
+    def get(self, key) -> Any:
+        """
+        Get the value of a property by its name.
+        :param key: the property name
+        :return: the value
+        """
+        return self._data[key]
+
     def __getitem__(self, key):
         return self._data[key]
 

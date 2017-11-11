@@ -39,7 +39,7 @@ class Observer1(object):
         self.signal2_data = args
 
 
-class TestObserver(unittest.TestCase):
+class TestObservableSuite(unittest.TestCase):
 
     def test_sendSignal1_verifyOnlySignal1Received(self):
         observable = Observable1()
