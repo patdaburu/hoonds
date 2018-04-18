@@ -7,9 +7,14 @@
 
 Dear diary...
 """
+from . import __version__
+import deprecation
 import logging
 
 
+@deprecation.deprecated(deprecated_in="0.0.12", removed_in="0.1.0",
+                        current_version=__version__,
+                        details='Use LoggerMixin instead.')
 def loggable_class(logger_name: str=None):
     """
     This is a decorator you can apply to a class to set it up with a Python ``logger`` property suitable for your
@@ -33,3 +38,20 @@ def loggable_class(logger_name: str=None):
         return cls
     # Return the inner function.
     return add_logger
+
+
+class LoggerMixin(object):
+    """
+    This is a mixin for classes that require a logger.
+    """
+    @property
+    def logger(self) -> logging.Logger:
+        try:
+            return self.__logger__
+        except AttributeError:
+            logger = logging.getLogger(
+                '{module}.{cls}'.format(
+                    module=self.__class__.__module__,
+                    cls=self.__class__.__name__))
+            self.__dict__['__logger__'] = logger
+            return logger

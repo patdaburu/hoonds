@@ -9,7 +9,7 @@ class TestCustomException(CustomException):
     pass
 
 
-class TestGeometryExceptionSuite(unittest.TestCase):
+class TestCustomExceptionSuite(unittest.TestCase):
 
     def test_initWithoutInner_verify(self):
         ge = TestCustomException(message='Test Message')
